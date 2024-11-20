@@ -307,9 +307,12 @@ elif main_section == "Prediction":
                                  min_value=forecast_df['Tarih'].min(), max_value=forecast_df['Tarih'].max())
 
         # Tarih aralığına göre filtreleme
-        filtered_df = forecast_df[(forecast_df['Tarih'] >= pd.to_datetime(start_date)) &
-                                  (forecast_df['Tarih'] <= pd.to_datetime(end_date))]
-
+        #filtered_df = forecast_df[(forecast_df['Tarih'] >= pd.to_datetime(start_date)) &
+        #                          (forecast_df['Tarih'] <= pd.to_datetime(end_date))]
+        filtered_data = df[
+            (df["Order Date"] >= pd.Timestamp(start_date)) &
+            (df["Order Date"] <= pd.Timestamp(end_date))
+            ]
         # Tahmin Satışlar Grafiği
         fig = px.line(filtered_df, x='Tarih', y='Tahmin Satışlar',
                       title="Tahmin Satışlar Zaman Serisi",
