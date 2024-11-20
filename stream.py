@@ -159,10 +159,13 @@ elif main_section == "Data":
         # Tarih aralığına göre veriyi filtreleme
         #filtered_data = df[
         #    (df["Order Date"] >= pd.to_datetime(start_date)) & (df["Order Date"] <= pd.to_datetime(end_date))]
+        df["Order Date"] = df["Order Date"].dt.date
+
+        # Tarih aralığına göre veriyi filtreleme
         filtered_data = df[
-            (df["Order Date"] >= pd.Timestamp(start_date)) &
-            (df["Order Date"] <= pd.Timestamp(end_date))
-            ]
+            (df["Order Date"] >= start_date) & 
+            (df["Order Date"] <= end_date)
+        ]
         # Zaman serisi grafiği için satışları toplama
         sales_by_date = filtered_data.groupby('Order Date')['Sales'].sum().reset_index()
 
