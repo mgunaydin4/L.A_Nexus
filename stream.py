@@ -151,7 +151,8 @@ elif main_section == "Data":
         st.title("Sales by Time")
 
         # Tarih aralığı seçimi
-        # Tarih aralığı seçimi
+        df["Order Date"] = pd.to_datetime(df["Order Date"], errors="coerce")
+
         start_date = st.date_input("Start Date", min_value=df["Order Date"].min().date(),
                                    max_value=df["Order Date"].max().date(), value=df["Order Date"].min().date())
         end_date = st.date_input("End Date", min_value=df["Order Date"].min().date(),
