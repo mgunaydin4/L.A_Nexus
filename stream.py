@@ -83,11 +83,13 @@ elif main_section == "Data":
             else:
                 plot_type = st.radio("Choose a plot type:", ["Barplot", "Pie Chart"])
                 if plot_type == "Barplot":
+                    counts = df[variable].value_counts()
                     fig = px.bar(
-                        df[variable].value_counts().reset_index(),
-                        x="index",
-                        y=variable,
-                        labels={"index": variable, variable: "Count"},
+                        counts,
+                        #df[variable].value_counts().reset_index(),
+                        x=counts.index,
+                        y=counts.values,
+                        labels={"x": variable, "y": "Count"},
                         title=f"{variable} Barplot"
                     )
                 elif plot_type == "Pie Chart":
