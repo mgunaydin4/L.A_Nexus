@@ -151,13 +151,14 @@ elif main_section == "Data":
         st.title("Sales by Time")
 
         # Tarih aralığı seçimi
-        start_date = st.date_input("Start Date", min_value=df["Order Date"].min(),
-                                   max_value=df["Order Date"].max(), value=df["Order Date"].min())
-        end_date = st.date_input("End Date", min_value=df["Order Date"].min(), max_value=df["Order Date"].max(),
-                                 value=df["Order Date"].max())
-
+        # Tarih aralığı seçimi
+        start_date = st.date_input("Start Date", min_value=df["Order Date"].min().date(),
+                                   max_value=df["Order Date"].max().date(), value=df["Order Date"].min().date())
+        end_date = st.date_input("End Date", min_value=df["Order Date"].min().date(),
+                                 max_value=df["Order Date"].max().date(), value=df["Order Date"].max().date())
+        
         # Tarih aralığına göre veriyi filtreleme
-        filtered_data = df[(df["Order Date"] >= pd.to_datetime(start_date)) & (df["Order Date"] <= pd.to_datetime(end_date))]
+        filtered_data = df[(df["Order Date"] >= pd.Timestamp(start_date)) & (df["Order Date"] <= pd.Timestamp(end_date))]
         
         
         # Zaman serisi grafiği için satışları toplama
